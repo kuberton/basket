@@ -22,9 +22,21 @@ spec:
             labels:
                 app: basket
         spec:
+            volumes:
+            - name: google-cloud-key
+              secret:
+                secretName: datastore.json
             containers:
                 - name: basket
                   image: gcr.io/just-strength-233319/github_kuberton_basket:latest
+
+                  volumeMounts:
+                    - name: google-cloud-key
+                      mountPath: /datastore.json
+
+                  env:
+                    - name: GOOGLE_APPLICATION_CREDENTIALS
+                      value: /datastore.json/json-auth.json
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 8080
