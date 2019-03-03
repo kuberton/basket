@@ -1,16 +1,9 @@
 package com.kubernetes.basket.repository;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.kubernetes.basket.entity.BasketState;
+import org.springframework.cloud.gcp.data.datastore.repository.DatastoreRepository;
+import org.springframework.stereotype.Repository;
 
-@RestController
-public class BasketRepository {
-
-    @RequestMapping(value = "/health", method = RequestMethod.GET)
-    public ResponseEntity getHealth() {
-        return new ResponseEntity(HttpStatus.OK);
-    }
+@Repository
+public interface BasketRepository extends DatastoreRepository<BasketState, String> {
 }
