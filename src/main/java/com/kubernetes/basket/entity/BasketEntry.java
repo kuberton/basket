@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 public class BasketEntry {
 
     @Id
-    private String uid;
+    private long uid;
     private String productId;
     private int quantity;
 }

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/basket/")
+@RequestMapping("/v1/basket")
 @RequiredArgsConstructor
 public class BasketController {
 
@@ -19,12 +19,12 @@ public class BasketController {
     }
 
     @PutMapping
-    public void addProductToBasket(@RequestBody BasketEntryDto basketEntry, @RequestHeader("userId") String userId) {
+    public void addProductToBasket(@RequestBody BasketEntryDto basketEntry, @RequestHeader("X-Auth") String userId) {
         basketService.addProductToBasket(userId, basketEntry.getProductId(), basketEntry.getQuantity());
     }
 
     @DeleteMapping
-    public void clearBasketForUser(@RequestHeader("userId") String userId) {
+    public void clearBasketForUser(@RequestHeader("X-Auth") String userId) {
         basketService.clearBasket(userId);
     }
 }

@@ -13,6 +13,6 @@ import java.util.List;
 public class BasketState {
 
     @Id
-    private String userId;
+    private long userId;
     private List<BasketEntry> basketEntries;
 }
