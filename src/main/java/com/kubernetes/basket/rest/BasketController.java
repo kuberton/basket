@@ -14,12 +14,12 @@ public class BasketController {
     private final BasketService basketService;
 
     @GetMapping
-    public BasketState getBasketStateForUserId(@RequestHeader("X-Auth") String userId) {
+    public BasketState getBasketStateForUserId(@RequestHeader("X-Auth") long userId) {
         return basketService.findBasketStateByUser(userId);
     }
 
     @PutMapping
-    public void addProductToBasket(@RequestBody BasketEntryDto basketEntry, @RequestHeader("X-Auth") String userId) {
+    public void addProductToBasket(@RequestBody BasketEntryDto basketEntry, @RequestHeader("X-Auth") long userId) {
         basketService.addProductToBasket(userId, basketEntry.getProductId(), basketEntry.getQuantity());
     }
 

@@ -17,18 +17,18 @@ public class BasketService {
 
     private final BasketRepository basketRepository;
 
-    public BasketState findBasketStateByUser(String userId) {
-        return basketRepository.findByUserId(Long.valueOf(userId)).stream().findFirst().orElse(null);
+    public BasketState findBasketStateByUser(long userId) {
+        return basketRepository.findByUserId(userId).stream().findFirst().orElse(null);
     }
 
-    public void addProductToBasket(String userId, String productId, int quantity) {
-        BasketState basketState = basketRepository.findByUserId(Long.valueOf(userId)).stream().findFirst().orElseGet(this::createEmptyBasket);
+    public void addProductToBasket(long userId, String productId, int quantity) {
+        BasketState basketState = basketRepository.findByUserId(userId).stream().findFirst().orElseGet(this::createEmptyBasket);
         BasketEntry basketEntry = new BasketEntry();
-        basketEntry.setUid(new RandomDataGenerator().nextLong(Long.MIN_VALUE, Long.MAX_VALUE));
+        basketEntry.setUid(userId);
         basketEntry.setProductId(productId);
         basketEntry.setQuantity(quantity);
         basketState.getBasketEntries().add(basketEntry);
-        basketState.setUserId(new RandomDataGenerator().nextLong(Long.MIN_VALUE, Long.MAX_VALUE));
+        basketState.setUserId(userId);
         basketRepository.save(basketState);
     }
 
